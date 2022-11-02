@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+<body class="root">
+  <div class="page">
+    <div class="popup">
+      <div class="popup__container">
+        <h2 class="popup__container-title">Редактировать профиль</h2>
+        <form action="#" name="namePopup" method="post" class="popup__container-form">
+          <input type="text" value="Жак-Ив Кусто" class="popup__container-formField popup__container-formField_name">
+          <input type="text" value="Исследователь океана" class="popup__container-formField popup__container-formField_job">
+          <button class="popup__container-formButton" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__buttonClose">
+          <img src="./images/popup__buttonClose.svg" alt="Закрыть" class="popup__buttonClose-img">
+        </button>
+      </div>
+    </div>
+    <header class="header">
+      <img src="./images/header__logo.svg" alt="Логотип" class="header__logo">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="./images/profile__avatar.jpg" alt="Аватар" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+          <button class="profile__info-editButton">
+            <img src="./images/profile__info-editButton.svg" alt="Редактировать" class="profile__info-editButton-img">
+          </button>
+          <p class="profile__info-subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__addButton">
+          <img src="./images/profile__addButton.svg" alt="Добавить" class="profile__addButton-img">
+        </button>
+      </section>
+      <section class="elements">
+        <ul class="elements__cards">
+          <li class="elements__card">
+            <img src="./images/elements__card-imgOne.jpg" alt="Фото" class="elements__card-img">
+            <h2 class="elements__card-title">Карачаевск</h2>
+            <div class="elements__card-like elements__card-like_disabled"></div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/elements__card-imgTwo.jpg" alt="Фото" class="elements__card-img">
+            <h2 class="elements__card-title">Гора Эльбрус</h2>
+            <div class="elements__card-like elements__card-like_disabled"></div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/elements__card-imgThree.jpg" alt="Фото" class="elements__card-img">
+            <h2 class="elements__card-title">Домбай</h2>
+            <div class="elements__card-like elements__card-like_disabled"></div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/elements__card-imgTwo.jpg" alt="Фото" class="elements__card-img">
+            <h2 class="elements__card-title">Гора Эльбрус</h2>
+            <div class="elements__card-like elements__card-like_disabled"></div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/elements__card-imgThree.jpg" alt="Фото" class="elements__card-img">
+            <h2 class="elements__card-title">Домбай</h2>
+            <div class="elements__card-like elements__card-like_disabled"></div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/elements__card-imgOne.jpg" alt="Фото" class="elements__card-img">
+            <h2 class="elements__card-title">Карачаево-Черкессия</h2>
+            <div class="elements__card-like elements__card-like_disabled"></div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.profile__avatar {
+  border-radius: 50%;
+  grid-area: profile__avatar;
+  margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+  .profile__avatar {
+    margin: 0 0 26px 0;
+  }
+}

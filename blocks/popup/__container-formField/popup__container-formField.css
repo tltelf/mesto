@@ -1,0 +1,17 @@
+.popup__container-formField {
+  width: 358px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  margin: auto;
+  outline: none;
+  padding: 0 0 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media (max-width: 540px) {
+  .popup__container-formField {
+    width: 238px;
+  }
+}

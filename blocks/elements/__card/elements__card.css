@@ -1,0 +1,8 @@
+.elements__card {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-areas: "elements__card-img elements__card-img"
+  "elements__card-title elements__card-like";
+}
