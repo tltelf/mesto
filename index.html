@@ -28,42 +28,13 @@
       </section>
       <section class="elements">
         <ul class="elements__cards">
-          <li class="card">
-            <img src="./images/card__img-one.jpg" alt="Карачаевск" class="card__img">
-            <h2 class="card__title">Карачаевск</h2>
-            <button type="button" class="card__like"></button>
-          </li>
-          <li class="card">
-            <img src="./images/card__img-two.jpg" alt="Гора Эльбрус" class="card__img">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button type="button" class="card__like"></button>
-          </li>
-          <li class="card">
-            <img src="./images/card__img-three.jpg" alt="Домбай" class="card__img">
-            <h2 class="card__title">Домбай</h2>
-            <button type="button" class="card__like"></button>
-          </li>
-          <li class="card">
-            <img src="./images/card__img-two.jpg" alt="Гора Эльбрус" class="card__img">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button type="button" class="card__like"></button>
-          </li>
-          <li class="card">
-            <img src="./images/card__img-three.jpg" alt="Домбай" class="card__img">
-            <h2 class="card__title">Домбай</h2>
-            <button type="button" class="card__like"></button>
-          </li>
-          <li class="card">
-            <img src="./images/card__img-one.jpg" alt="Карачаево-Черкессия" class="card__img">
-            <h2 class="card__title">Карачаево-Черкессия</h2>
-            <button type="button" class="card__like"></button>
-          </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+
     <div class="popup">
       <div class="popup__container">
         <h2 class="popup__container-title">Редактировать профиль</h2>
@@ -75,7 +46,37 @@
         <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
       </div>
     </div>
+
+    <div class="popup">
+      <div class="popup__container">
+        <h2 class="popup__container-title">Новое место</h2>
+        <form action="#" name="namePopup_new-place" method="post" class="popup__container-form popup__container-form_new-place">
+          <input type="text" name="title" value="" placeholder="Название" class="popup__container-form-field popup__container-form-field_new-place-title">
+          <input type="text" name="link" value="" placeholder="Ссылка на картинку" class="popup__container-form-field popup__container-form-field popup__container-form-field_new-place-link">
+          <button class="popup__container-form-button" type="submit">Создать</button>
+        </form>
+        <button type="button" aria-label="Закрыть" class="popup__button-close popup__button-close_new-place"></button>
+      </div>
+    </div>
+
+    <div class="popup popup_photo-place">
+      <div class="popup__container-photo-place">
+        <img src="" alt="" class="popup__img_photo-place">
+        <h2 class="popup__container-title-photo-place"></h2>
+        <button type="button" aria-label="Закрыть" class="popup__button-close popup__button-close_photo-place"></button>
+      </div>
+    </div>
   </div>
+
+  <template id="template">
+    <li class="card">
+      <img src="" alt="" class="card__img">
+      <button type="button" class="card__btn-delete"></button>
+      <h2 class="card__title"></h2>
+      <button type="button" class="card__like"></button>
+    </li>
+  </template>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
