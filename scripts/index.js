@@ -18,6 +18,8 @@ const popupContainerTitle = document.querySelector('.popup__container-title-phot
 const container = document.querySelector('.elements__cards');
 const cardTemplate = document.querySelector('#template').content.querySelector('.card');
 const closeButtons = document.querySelectorAll('.popup__button-close');
+nameInput.value = title.textContent;
+jobInput.value = subtitle.textContent;
 
 const initialCards = [
   {
@@ -96,8 +98,6 @@ initialCards.forEach((dataCard) => {
 //  Функция открытия поп-апа
 
 function openPopup(popup) {
-  nameInput.value = title.textContent;
-  jobInput.value = subtitle.textContent;
   popup.classList.add('popup_opened');
 }
 
