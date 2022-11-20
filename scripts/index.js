@@ -18,8 +18,6 @@ const popupContainerTitle = document.querySelector('.popup__container-title-phot
 const container = document.querySelector('.elements__cards');
 const cardTemplate = document.querySelector('#template').content.querySelector('.card');
 const closeButtons = document.querySelectorAll('.popup__button-close');
-nameInput.value = title.textContent;
-jobInput.value = subtitle.textContent;
 
 const initialCards = [
   {
@@ -136,7 +134,11 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-buttonEdit.addEventListener('click', ()=> openPopup(profilePopup));
-buttonAdd.addEventListener('click', ()=> openPopup(cardPopup));
+buttonEdit.addEventListener('click', () => { 
+  openPopup(profilePopup)
+  nameInput.value = title.textContent;
+  jobInput.value = subtitle.textContent;
+});
+buttonAdd.addEventListener('click', () => openPopup(cardPopup));
 formElement.addEventListener('submit', submitFormHandler);
 formElementNewPlace.addEventListener('submit', submitFormHandlerNewPlace);
