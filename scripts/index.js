@@ -18,6 +18,7 @@ const popupContainerTitle = document.querySelector('.popup__container-title-phot
 const container = document.querySelector('.elements__cards');
 const cardTemplate = document.querySelector('#template').content.querySelector('.card');
 const closeButtons = document.querySelectorAll('.popup__button-close');
+const popups = Array.from(document.querySelectorAll('.popup'));
 
 const initialCards = [
   {
@@ -97,12 +98,26 @@ initialCards.forEach((dataCard) => {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  popups.forEach((popup) => {
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closePopup(popup);
+      }
+    });
+  });
 }
 
 //  Функция закрытия поп-апа
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  popups.forEach((popup) => {
+    window.removeEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closePopup(popup);
+      }
+    });
+  });
 }
 
 //  Обработчик отправки формы
@@ -127,18 +142,32 @@ function submitFormHandlerNewPlace (evt) {
   closePopup(cardPopup);
 }
 
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап 
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
+popups.forEach((popup) => {
+  closeButtons.forEach((button) => {
+    button.addEventListener('click', () => closePopup(popup));
+  });
+  popup.addEventListener('click', function (event) {
+    if (!event.target.closest('.popup__container') && !event.target.closest('.popup__container-photo-place')) {
+      closePopup(popup);
+    }
+  });
 });
 
-buttonEdit.addEventListener('click', () => { 
-  openPopup(profilePopup)
+buttonEdit.addEventListener('click', () => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__container-form-field'));
   nameInput.value = title.textContent;
   jobInput.value = subtitle.textContent;
+  openPopup(profilePopup);
+  inputList.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement);
+  });
+  enableValidation();
 });
-buttonAdd.addEventListener('click', () => openPopup(cardPopup));
+
+buttonAdd.addEventListener('click', () => {
+  openPopup(cardPopup);
+  enableValidation();
+});
+
 formElement.addEventListener('submit', submitFormHandler);
 formElementNewPlace.addEventListener('submit', submitFormHandlerNewPlace);
