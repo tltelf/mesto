@@ -1,6 +1,5 @@
 const buttonEdit = document.querySelector('.profile__info-edit-button');
-const buttonClose = document.querySelector('.popup__button-close');
-const formElement = document.querySelector('.popup__container-form');
+const formElementProfile = document.querySelector('.popup__container-form_profile');
 const nameInput = document.querySelector('.popup__container-form-field_type_name');
 const jobInput = document.querySelector('.popup__container-form-field_type_job');
 const title = document.querySelector('.profile__info-title');
@@ -19,6 +18,7 @@ const container = document.querySelector('.elements__cards');
 const cardTemplate = document.querySelector('#template').content.querySelector('.card');
 const closeButtons = document.querySelectorAll('.popup__button-close');
 const popups = Array.from(document.querySelectorAll('.popup'));
+const formNewPlace = document.forms.namePopup_newPlace;
 
 const initialCards = [
   {
@@ -98,35 +98,35 @@ initialCards.forEach((dataCard) => {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popups.forEach((popup) => {
-    window.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closePopup(popup);
-      }
-    });
-  });
+  document.addEventListener('keydown', closePopup);
+  popup.addEventListener('click', closePopup);
 }
 
 //  Функция закрытия поп-апа
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+function closePopup(event) {
+  const target = event.target;
   popups.forEach((popup) => {
-    window.removeEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closePopup(popup);
-      }
-    });
+    if (
+      target === popup ||
+      target.classList.contains('popup__button-close') ||
+      target.classList.contains('popup__container-form-button') ||
+      event.code === 'Escape'
+    ) {
+      popup.classList.remove('popup_opened');
+      document.removeEventListener('keydown', closePopup);
+      popup.removeEventListener('click', closePopup);
+    }
   });
 }
 
 //  Обработчик отправки формы
 
-function submitFormHandler (evt) {
+function submitFormHandlerProfile (evt) {
   evt.preventDefault();
   title.textContent = nameInput.value;
   subtitle.textContent = jobInput.value;
-  closePopup(profilePopup);
+  closePopup;
 }
 
 // Обработчик отправки формы добавления нового места
@@ -137,37 +137,19 @@ function submitFormHandlerNewPlace (evt) {
       name: titleInput.value,
       link: linkInput.value
     });
-  titleInput.value = '';
-  linkInput.value = '';
-  closePopup(cardPopup);
+  formNewPlace.reset();
+  closePopup;
 }
 
-popups.forEach((popup) => {
-  closeButtons.forEach((button) => {
-    button.addEventListener('click', () => closePopup(popup));
-  });
-  popup.addEventListener('click', function (event) {
-    if (!event.target.closest('.popup__container') && !event.target.closest('.popup__container-photo-place')) {
-      closePopup(popup);
-    }
-  });
-});
-
 buttonEdit.addEventListener('click', () => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__container-form-field'));
   nameInput.value = title.textContent;
   jobInput.value = subtitle.textContent;
   openPopup(profilePopup);
-  inputList.forEach((inputElement) => {
-    checkInputValidity(formElement, inputElement);
-  });
-  enableValidation();
 });
 
 buttonAdd.addEventListener('click', () => {
   openPopup(cardPopup);
-  enableValidation();
 });
 
-formElement.addEventListener('submit', submitFormHandler);
+formElementProfile.addEventListener('submit', submitFormHandlerProfile);
 formElementNewPlace.addEventListener('submit', submitFormHandlerNewPlace);
