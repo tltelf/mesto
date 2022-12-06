@@ -98,26 +98,24 @@ initialCards.forEach((dataCard) => {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopup);
-  popup.addEventListener('click', closePopup);
+  document.addEventListener('keydown', closePopupOnEsc);
 }
 
 //  Функция закрытия поп-апа
 
-function closePopup(event) {
-  const target = event.target;
-  popups.forEach((popup) => {
-    if (
-      target === popup ||
-      target.classList.contains('popup__button-close') ||
-      target.classList.contains('popup__container-form-button') ||
-      event.code === 'Escape'
-    ) {
-      popup.classList.remove('popup_opened');
-      document.removeEventListener('keydown', closePopup);
-      popup.removeEventListener('click', closePopup);
-    }
-  });
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupOnEsc);
+}
+
+// Функция, которая определяет нажатие на клавишу ESC и вызывает закрытие поп-апа
+
+function closePopupOnEsc(event) {
+  if (event.code === 'Escape') {
+    popups.forEach((popup) => {
+      closePopup(popup);
+    })
+  }
 }
 
 //  Обработчик отправки формы
@@ -126,7 +124,6 @@ function submitFormHandlerProfile (evt) {
   evt.preventDefault();
   title.textContent = nameInput.value;
   subtitle.textContent = jobInput.value;
-  closePopup;
 }
 
 // Обработчик отправки формы добавления нового места
@@ -138,8 +135,19 @@ function submitFormHandlerNewPlace (evt) {
       link: linkInput.value
     });
   formNewPlace.reset();
-  closePopup;
 }
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', function (event) {
+    if (
+      event.target.classList.contains('popup') ||
+      event.target.classList.contains('popup__container-form-button') ||
+      event.target.classList.contains('popup__button-close')
+    ) {
+      closePopup(popup);
+    }
+  })
+})
 
 buttonEdit.addEventListener('click', () => {
   nameInput.value = title.textContent;
