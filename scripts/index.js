@@ -19,6 +19,7 @@ const cardTemplate = document.querySelector('#template').content.querySelector('
 const closeButtons = document.querySelectorAll('.popup__button-close');
 const popups = Array.from(document.querySelectorAll('.popup'));
 const formNewPlace = document.forms.namePopup_newPlace;
+const buttonElementNewPlace = document.querySelector('.popup__container-form-button_new-place');
 
 const initialCards = [
   {
@@ -124,6 +125,7 @@ function submitFormHandlerProfile (evt) {
   evt.preventDefault();
   title.textContent = nameInput.value;
   subtitle.textContent = jobInput.value;
+  closePopup(profilePopup);
 }
 
 // Обработчик отправки формы добавления нового места
@@ -135,13 +137,14 @@ function submitFormHandlerNewPlace (evt) {
       link: linkInput.value
     });
   formNewPlace.reset();
+  disableButtonState(buttonElementNewPlace);
+  closePopup(cardPopup);
 }
 
 popups.forEach((popup) => {
   popup.addEventListener('click', function (event) {
     if (
       event.target.classList.contains('popup') ||
-      event.target.classList.contains('popup__container-form-button') ||
       event.target.classList.contains('popup__button-close')
     ) {
       closePopup(popup);

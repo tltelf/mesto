@@ -57,14 +57,18 @@ function enableValidation ({
 
   function toggleButtonState(inputList, buttonElement) {
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(inactiveButtonClass);
-      buttonElement.setAttribute('disabled', 'disabled');
+      disableButtonState(buttonElement);
     } else {
       buttonElement.classList.remove(inactiveButtonClass);
       buttonElement.removeAttribute('disabled', 'disabled');
     }
   };
 };
+
+function disableButtonState(buttonElement) {
+  buttonElement.classList.add('popup__container-form-button_inactive');
+  buttonElement.setAttribute('disabled', 'disabled');
+}
 
 enableValidation({
   formSelector: '.popup__container-form',
