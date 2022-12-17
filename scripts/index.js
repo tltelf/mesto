@@ -83,7 +83,7 @@ formList.forEach((formElement) => {
 
 //  Функция открытия поп-апа
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEsc);
 }

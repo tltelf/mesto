@@ -1,3 +1,5 @@
+import {openPopup} from './index.js';
+
 export class Card {
   constructor(data, templateSelector) {
     this._name = data.name;
@@ -38,6 +40,9 @@ export class Card {
   }
 
   _handleOpenImage(evt) {
+    const popupContainerTitle = document.querySelector('.popup__container-title-photo-place');
+    const photoPlacePopup = document.querySelector('.popup_photo-place');
+    const popupImg = document.querySelector('.popup__img-photo-place');
     openPopup(photoPlacePopup);
     popupImg.src = evt.target.src;
     popupImg.alt = evt.target.alt;
