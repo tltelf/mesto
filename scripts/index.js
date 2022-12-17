@@ -1,3 +1,6 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 const buttonEdit = document.querySelector('.profile__info-edit-button');
 const formElementProfile = document.querySelector('.popup__container-form_profile');
 const nameInput = document.querySelector('.popup__container-form-field_type_name');
@@ -7,20 +10,21 @@ const subtitle = document.querySelector('.profile__info-subtitle');
 const buttonAdd = document.querySelector('.profile__add-button');
 const profilePopup = document.querySelector('.profile-popup');
 const cardPopup = document.querySelector('.card-popup')
-const photoPlacePopup = document.querySelector('.popup_photo-place');
-const buttonCloseNewPlace = document.querySelector('.popup__button-close_new-place');
 const formElementNewPlace = document.querySelector('.popup__container-form_new-place');
 const titleInput = document.querySelector('.popup__container-form-field_new-place-title');
 const linkInput = document.querySelector('.popup__container-form-field_new-place-link');
-const popupImg = document.querySelector('.popup__img-photo-place');
-const popupContainerTitle = document.querySelector('.popup__container-title-photo-place');
-const container = document.querySelector('.elements__cards');
-const cardTemplate = document.querySelector('#template').content.querySelector('.card');
-const closeButtons = document.querySelectorAll('.popup__button-close');
 const popups = Array.from(document.querySelectorAll('.popup'));
 const formNewPlace = document.forms.namePopup_newPlace;
 const buttonElementNewPlace = document.querySelector('.popup__container-form-button_new-place');
-
+const dataValidation = {
+  formSelector: '.popup__container-form',
+  inputSelector: '.popup__container-form-field',
+  submitButtonSelector: '.popup__container-form-button',
+  inactiveButtonClass: 'popup__container-form-button_inactive',
+  inputErrorClass: 'popup__container-form_type_error',
+  errorClass: 'popup__container-form-error_active'
+};
+const formList = Array.from(document.querySelectorAll(dataValidation.formSelector));
 const initialCards = [
   {
     name: 'Байкал',
@@ -48,51 +52,33 @@ const initialCards = [
   }
 ];
 
-// Удаление карточки
+// Генерация карточек
 
-const handleDeleteCard = (event) => {
-  event.target.closest('.card').remove();
+function renderCard(cards) {
+  cards.forEach((item) => {
+    const card = new Card(item, '#template');
+  
+    const cardElement = card.generateCard();
+  
+    document.querySelector('.elements__cards').prepend(cardElement);
+  })
+} 
+
+renderCard(initialCards);
+
+// Функция, отключающая кнопку сабмита
+
+export function disableButtonState(buttonElement) {
+  buttonElement.classList.add('popup__container-form-button_inactive');
+  buttonElement.setAttribute('disabled', 'disabled');
 }
 
-// Генерация карточки
+// Устанавливаем валидацию на каждую отдельную форму
 
-const generateCard = (dataCard) => {
-  const newCard = cardTemplate.cloneNode(true);
-
-  const cardTitle = newCard.querySelector('.card__title');
-  cardTitle.textContent = dataCard.name;
-
-  const image = newCard.querySelector('.card__img');
-  image.src = dataCard.link;
-  image.alt = dataCard.name;
-
-  newCard.querySelector('.card__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like_active');
-  });
-
-  image.addEventListener('click', function (evt) {
-    openPopup(photoPlacePopup);
-    popupImg.src = evt.target.src;
-    popupImg.alt = evt.target.alt;
-    popupContainerTitle.textContent = evt.target.alt;
-  });
-
-  const btnDelete = newCard.querySelector('.card__btn-delete');
-  btnDelete.addEventListener('click', handleDeleteCard)
-
-  return newCard;
-}
-
-// Добавление карточки
-
-const renderCard = (dataCard) => {
-  container.prepend(generateCard(dataCard));
-}
-
-// Рендер карточек
-
-initialCards.forEach((dataCard) => {
-  renderCard(dataCard);
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator(dataValidation, formElement);
+  
+  formValidator.enableValidation();
 })
 
 //  Функция открытия поп-апа
@@ -132,10 +118,10 @@ function submitFormHandlerProfile (evt) {
 
 function submitFormHandlerNewPlace (evt) {
   evt.preventDefault();
-  renderCard({ 
+  renderCard([{ 
       name: titleInput.value,
       link: linkInput.value
-    });
+    }]);
   formNewPlace.reset();
   disableButtonState(buttonElementNewPlace);
   closePopup(cardPopup);
