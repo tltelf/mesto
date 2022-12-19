@@ -1,5 +1,6 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
+import {openPopup, closePopup, popups} from '../utils/utils.js';
 
 const buttonEdit = document.querySelector('.profile__info-edit-button');
 const formElementProfile = document.querySelector('.popup__container-form_profile');
@@ -13,9 +14,11 @@ const cardPopup = document.querySelector('.card-popup')
 const formElementNewPlace = document.querySelector('.popup__container-form_new-place');
 const titleInput = document.querySelector('.popup__container-form-field_new-place-title');
 const linkInput = document.querySelector('.popup__container-form-field_new-place-link');
-const popups = Array.from(document.querySelectorAll('.popup'));
 const formNewPlace = document.forms.namePopup_newPlace;
+const buttonElementProfile = document.querySelector('.popup__container-form-button_profile');
 const buttonElementNewPlace = document.querySelector('.popup__container-form-button_new-place');
+const container = document.querySelector('.elements__cards');
+
 const dataValidation = {
   formSelector: '.popup__container-form',
   inputSelector: '.popup__container-form-field',
@@ -24,7 +27,7 @@ const dataValidation = {
   inputErrorClass: 'popup__container-form_type_error',
   errorClass: 'popup__container-form-error_active'
 };
-const formList = Array.from(document.querySelectorAll(dataValidation.formSelector));
+
 const initialCards = [
   {
     name: 'Байкал',
@@ -54,58 +57,31 @@ const initialCards = [
 
 // Генерация карточек
 
-function renderCard(cards) {
+function renderCards(cards) {
   cards.forEach((item) => {
     const card = new Card(item, '#template');
-  
+    
     const cardElement = card.generateCard();
   
-    document.querySelector('.elements__cards').prepend(cardElement);
+    container.prepend(cardElement);
   })
 } 
 
-renderCard(initialCards);
+renderCards(initialCards);
 
-// Функция, отключающая кнопку сабмита
+// Функция, включающая валидацию формы и удаляющая ошибки валидации при открытии формы
 
-export function disableButtonState(buttonElement) {
-  buttonElement.classList.add('popup__container-form-button_inactive');
-  buttonElement.setAttribute('disabled', 'disabled');
-}
+function turnOnValidation(popup, buttonElement) {
+  const formValidator = new FormValidator(dataValidation, popup);
 
-// Устанавливаем валидацию на каждую отдельную форму
-
-formList.forEach((formElement) => {
-  const formValidator = new FormValidator(dataValidation, formElement);
-  
   formValidator.enableValidation();
-})
-
-//  Функция открытия поп-апа
-
-export function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupOnEsc);
+  formValidator.disableButtonState(buttonElement);
+  formValidator.inputList.forEach((inputElement) => {
+    formValidator.hideInputError(inputElement);
+  })
 }
 
-//  Функция закрытия поп-апа
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupOnEsc);
-}
-
-// Функция, которая определяет нажатие на клавишу ESC и вызывает закрытие поп-апа
-
-function closePopupOnEsc(event) {
-  if (event.code === 'Escape') {
-    popups.forEach((popup) => {
-      closePopup(popup);
-    })
-  }
-}
-
-//  Обработчик отправки формы
+// Обработчик отправки формы
 
 function submitFormHandlerProfile (evt) {
   evt.preventDefault();
@@ -118,12 +94,11 @@ function submitFormHandlerProfile (evt) {
 
 function submitFormHandlerNewPlace (evt) {
   evt.preventDefault();
-  renderCard([{ 
+  renderCards([{ 
       name: titleInput.value,
       link: linkInput.value
     }]);
   formNewPlace.reset();
-  disableButtonState(buttonElementNewPlace);
   closePopup(cardPopup);
 }
 
@@ -139,12 +114,16 @@ popups.forEach((popup) => {
 })
 
 buttonEdit.addEventListener('click', () => {
+  turnOnValidation(profilePopup, buttonElementProfile);
   nameInput.value = title.textContent;
   jobInput.value = subtitle.textContent;
   openPopup(profilePopup);
 });
 
 buttonAdd.addEventListener('click', () => {
+  turnOnValidation(cardPopup, buttonElementNewPlace);
+  titleInput.value = '';
+  linkInput.value = '';
   openPopup(cardPopup);
 });
 
