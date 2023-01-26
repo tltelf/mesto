@@ -4,11 +4,9 @@ export const jobInput = document.querySelector('.popup__container-form-field_typ
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const profilePopup = document.querySelector('.profile-popup');
 export const cardPopup = document.querySelector('.card-popup')
-export const buttonElementProfile = document.querySelector('.popup__container-form-button_profile');
-export const buttonElementNewPlace = document.querySelector('.popup__container-form-button_new-place');
 export const container = document.querySelector('.elements__cards');
-export const popupContainerTitle = document.querySelector('.popup__container-title-photo-place');
-export const popupImg = document.querySelector('.popup__img-photo-place');
+export const profileForm = document.forms.profileForm;
+export const newPlaceForm = document.forms.newPlaceForm;
 
 export const dataValidation = {
   formSelector: '.popup__container-form',

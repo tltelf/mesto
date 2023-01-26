@@ -27,8 +27,8 @@ export class Card {
       this._handleDeleteCard(evt);
     });
 
-    this._image.addEventListener('click', (evt) => {
-      this._handleCardClick(evt);
+    this._image.addEventListener('click', () => {
+      this._handleCardClick();
     });
   }
 
