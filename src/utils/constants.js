@@ -3,10 +3,22 @@ export const nameInput = document.querySelector('.popup__container-form-field_ty
 export const jobInput = document.querySelector('.popup__container-form-field_type_job');
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const profilePopup = document.querySelector('.profile-popup');
-export const cardPopup = document.querySelector('.card-popup')
+export const cardPopup = document.querySelector('.card-popup');
+export const avatarPopup = document.querySelector('.avatar-popup');
+export const buttonEditAvatar = document.querySelector('.profile__avatar-container');
+export const avatar = document.querySelector('.profile__avatar');
+export const myId = '8d1a99b21c6b5b53416c55e3';
 export const container = document.querySelector('.elements__cards');
+export const btnFormNewPlace = document.querySelector('.popup__container-form-button_new-place');
+export const btnFormProfile = document.querySelector('.popup__container-form-button_profile');
+export const btnFormAvatar = document.querySelector('.popup__container-form-button_avatar');
+export const btnTextNewPlace = 'Создать';
+export const btnTextNewPlaceLoading = 'Создание...';
+export const btnText = 'Сохранить';
+export const btnTextLoading = 'Сохранение...';
 export const profileForm = document.forms.profileForm;
 export const newPlaceForm = document.forms.newPlaceForm;
+export const avatarForm = document.forms.avatarForm;
 
 export const dataValidation = {
   formSelector: '.popup__container-form',

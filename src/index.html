@@ -13,7 +13,9 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+        </div>
         <div class="profile__info">
           <h1 class="profile__info-title">Жак-Ив Кусто</h1>
           <button type="button" class="profile__info-edit-button">
@@ -77,6 +79,29 @@
         <button type="button" aria-label="Закрыть" class="popup__button-close popup__button-close_photo-place"></button>
       </div>
     </div>
+
+    <div class="popup delete-card-popup">
+      <div class="popup__container popup__container_delete-card">
+        <h2 class="popup__container-title popup__container-title_delete-card">Вы уверены?</h2>
+        <button class="popup__container-form-button popup__container-form-button_delete-card" type="button">Да</button>
+        <button type="button" aria-label="Закрыть" class="popup__button-close popup__button-close_delete-card"></button>
+      </div>
+    </div>
+
+    <div class="popup avatar-popup">
+      <div class="popup__container popup__container_avatar">
+        <h2 class="popup__container-title">Обновить аватар</h2>
+        <form novalidate action="#" name="avatarForm" method="post" class="popup__container-form popup__container-form_new-place">
+          <label class="popup__container-form-label">
+            <input type="url" name="avatar" id="avatar-link-input" value="" placeholder="https://somewebsite.com/someimage.jpg" class="popup__container-form-field popup__container-form-field popup__container-form-field_avatar" required>
+            <span class="popup__container-form-error avatar-link-input-error"></span>
+          </label>
+          <button class="popup__container-form-button popup__container-form-button_avatar" type="submit">Сохранить</button>
+        </form>
+        <button type="button" aria-label="Закрыть" class="popup__button-close popup__button-close_avatar"></button>
+      </div>
+    </div>
+
   </div>
 
   <template id="template">
@@ -84,7 +109,7 @@
       <img src="#" alt="" class="card__img">
       <button type="button" class="card__btn-delete"></button>
       <h2 class="card__title"></h2>
-      <button type="button" class="card__like"></button>
+      <button type="button" class="card__like"><span class="card__like_number">0</span></button>
     </li>
   </template>
 </body>
