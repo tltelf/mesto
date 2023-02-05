@@ -14,9 +14,6 @@ export class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch((err) => {
-      console.log(err);
-    })
   }
 
   getInitialCards() {
@@ -28,9 +25,6 @@ export class Api {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
     })
   }
 
@@ -46,9 +40,6 @@ export class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch((err) => {
-      console.log(err);
-    })
   }
 
   renderCard(data) {
@@ -63,9 +54,6 @@ export class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch((err) => {
-      console.log(err);
-    })
   }
 
   deleteCard(id) {
@@ -78,9 +66,6 @@ export class Api {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
     })
   }
 
@@ -95,9 +80,6 @@ export class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch((err) => {
-      console.log(err);
-    })
   }
 
   deleteLikeCard(id) {
@@ -110,9 +92,6 @@ export class Api {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
     })
   }
 
@@ -127,9 +106,6 @@ export class Api {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
     })
   }
 

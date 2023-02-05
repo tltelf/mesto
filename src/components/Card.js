@@ -1,5 +1,5 @@
 export class Card {
-  constructor({data, handleCardClick, handleDelete, handleLike, handleDeleteLike}, templateSelector, myId) {
+  constructor({data, myId, handleCardClick, handleDelete, handleLike, handleDeleteLike}, templateSelector) {
     this._name = data.name;
     this._link = data.link;
     this._ownerId = data['owner']['_id'];
@@ -59,6 +59,7 @@ export class Card {
 
   deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   _checkLikeOwner() {

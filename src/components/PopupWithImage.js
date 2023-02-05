@@ -8,10 +8,10 @@ export class PopupWithImage extends Popup {
   }
 
   open(data) {
-    super.open();
     this._popupImg.src = data.link;
     this._popupImg.alt = data.name;
     this._popupContainerTitle.textContent = data.name;
+    super.open();
   }
 
 }
