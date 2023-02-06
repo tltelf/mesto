@@ -45,11 +45,13 @@ const popupWithFormProfile = new PopupWithForm(
     api.setUserInfo({ name: inputValues['name'], about: inputValues['job'] })
     .then(() => {
       userInfo.setUserInfo(inputValues['name'], inputValues['job']);
-      popupWithFormProfile.renderLoading(btnText);
       popupWithFormProfile.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupWithFormProfile.renderLoading(btnText);
     })
   },
   profileForm, btnFormProfile
@@ -64,11 +66,13 @@ const popupWithFormAvatar = new PopupWithForm(
     api.updateAvatar({ avatar: inputValues['avatar']})
     .then((data) => {
       userInfo.setUserAvatar(data['avatar']);
-      popupWithFormAvatar.renderLoading(btnText);
       popupWithFormAvatar.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupWithFormAvatar.renderLoading(btnText);
     })
   },
   avatarForm, btnFormAvatar
@@ -83,11 +87,13 @@ const popupWithFormNewPlace = new PopupWithForm(
     api.renderCard({ name: inputValues['title'], link: inputValues['link'] })
     .then((data) => {
       renderCards.renderItems([data]);
-      popupWithFormNewPlace.renderLoading(btnTextNewPlace);
       popupWithFormNewPlace.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupWithFormNewPlace.renderLoading(btnTextNewPlace);
     })
   },
   newPlaceForm, btnFormNewPlace
